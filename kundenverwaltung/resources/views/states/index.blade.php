@@ -31,7 +31,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
               </div>
           </form>
           </div>
@@ -40,5 +40,22 @@
 
 
       {{-- Ausgabe aller Statuseinträge in Tabelle --}}
+
+      <div class="table-responsive my-4">
+        <table class="table table-striped">
+          <tbody>
+            @foreach($states as $state)
+              <tr>
+                <td>{{ $state->state }}</td>
+                <td>
+
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+
+
   </div>
 </x-app-layout>

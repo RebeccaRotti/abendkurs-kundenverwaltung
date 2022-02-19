@@ -33,9 +33,14 @@ class StateController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'stateTitle' => 'required|string'
+        ]);
+        $newState = new States();
+        $newState->state = $request->stateTitle;
+        $newState->save();
+        return back();
     }
 
     /**

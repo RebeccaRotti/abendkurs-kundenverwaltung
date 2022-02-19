@@ -1,6 +1,6 @@
 ## Installation
 
-Mit der Powershell in den htdoc Ordner von 
+Mit der Powershell in den htdoc Ordner von XAMPP navigieren
 
 - composer create-project laravel/laravel kundenverwaltung
 - cd kundenverwaltung
@@ -34,3 +34,8 @@ Mit der Powershell in den htdoc Ordner von
 ## Ressourcen Controller erstellen und im web.php definieren
 [Laravel Doc Resource Controller](https://laravel.com/docs/9.x/controllers#resource-controllers)
 - php artisan make:controller StatesController --resource
+- Funktionen index & store erstellt
+
+## View & Route
+- routes/web.php: Route zum Ressourcen Controller definiert
+- views/resources: neuer Ordner states & neues File: index.blade.php
