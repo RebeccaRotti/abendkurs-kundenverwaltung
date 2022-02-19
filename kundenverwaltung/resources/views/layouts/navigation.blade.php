@@ -22,6 +22,11 @@
             </ul>
             @endguest
             @auth
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('state.index') }}">Status</a>
+                </li>
+            </ul>
             <ul class="navbar-nav me-0 ms-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

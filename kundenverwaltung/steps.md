@@ -21,3 +21,16 @@ Mit der Powershell in den htdoc Ordner von
 ## Datenbank einspielen
 - php artisan migrate
 
+## Models erstellen
+- php artisan make:model States
+- php artisan make:model Companies
+- php artisan make:model Customers
+- php artisan make:model Projects 
+
+## Models definieren
+- protected $table
+- protected $fillable
+
+## Ressourcen Controller erstellen und im web.php definieren
+[Laravel Doc Resource Controller](https://laravel.com/docs/9.x/controllers#resource-controllers)
+- php artisan make:controller StatesController --resource
