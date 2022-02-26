@@ -16,4 +16,7 @@ class Companies extends Model
         'note' // Text
     ];
 
+    public function customers() {
+        return $this->hasMany(Customers::class, 'company_id', 'id');
+    }
 }
