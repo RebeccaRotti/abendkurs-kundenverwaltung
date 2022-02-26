@@ -48,14 +48,29 @@
               <tr>
                 <td>{{ $state->state }}</td>
                 <td>
-
+                  <x-buttonEdit onclick="editState({{ $state->id }})"></x-buttonEdit>
                 </td>
               </tr>
             @endforeach
           </tbody>
         </table>
       </div>
-
-
   </div>
+  <script>
+
+    function editState(id) {
+      $.ajax({
+        method: "GET",
+        url: 'state/' + id,
+        success: function (data) {
+          $('#modalContainer').html(data);
+          $('#editModal').modal('show');
+        },
+        error: function (data) {
+          console.log(data);
+        }
+      });
+    }
+    
+  </script>
 </x-app-layout>

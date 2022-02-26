@@ -49,9 +49,11 @@ class StateController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        $state = States::findOrFail($id);
+        return view('states.modal.edit')->with([
+            'state' => $state
+        ]);
     }
 
     /**
@@ -60,8 +62,7 @@ class StateController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -72,9 +73,14 @@ class StateController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $request->validate([
+            'inputState' => 'required|string|max:45'
+        ]);
+        $state = States::findOrFail($id);
+        $state->state = $request->inputState;
+        $state->save();
+        return back();
     }
 
     /**

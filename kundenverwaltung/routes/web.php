@@ -14,14 +14,19 @@ use App\Http\Controllers\StateController;
 |
 */
 
-Route::resource('state', StateController::class);
+/* Nur mit Login erreichbar - Nach Authentifizierung */
+Route::middleware('auth')->group(function() {
 
+    Route::resource('state', StateController::class);
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+});
+
+/* Öffentliche Links */
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
