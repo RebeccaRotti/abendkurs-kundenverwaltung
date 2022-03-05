@@ -114,17 +114,22 @@
                 {{ $company->address }}<br>
                 {{ $company->note }}
               </p>
+              
               @foreach($company->customers as $customer)
-                <p class="card-text">
-                  <span class="bg-dark text-white d-block p-1">
-                    {{ $customer->forename }} {{ $customer->lastname }}
-                  </span>
-                  {{ $customer->email }}<br>
+                <div class="card-text">
+                  <div class="d-flex justify-content-between bg-dark text-white d-block p-1">
+                    <span>
+                      {{ $customer->forename }} {{ $customer->lastname }}
+                    </span>
+                    <x-buttonEdit onclick="editCustomer({{$customer->id}})"></x-buttonEdit>
+                  </div>
+                  <p>{{ $customer->email }}<br>
                   {{ $customer->function }}<br>
                   {!! $customer->note ?? '<small>empty</small>' !!}<br>
-                  <small>{{ $customer->created_at }} / {{ $customer->updated_at }}</small>
-                </p>
+                  <small>{{ $customer->created_at }} / {{ $customer->updated_at }}</small></p>
+                </div>
               @endforeach
+
             </div>
             <div class="card-footer small">
               <p class="m-0">{{ $company->created_at ?? 'no date' }} / {{ $company->updated_at }}</p>
@@ -134,4 +139,27 @@
       @endforeach
     </div>
   </div>
+
+  <script>
+    function editCustomer(customer_id) {
+   
+      $.ajax({
+        method: 'POST',
+        url: '{{ route('modalEditCustomer') }}',
+        data: { 
+          "_token": "{{ csrf_token() }}",
+          customer_id: customer_id 
+        },
+        success: function(data) {
+          $('#modalContainer').html(data);
+          $('#editModal').modal('show');
+        }, 
+        error: function(data) {
+          console.log(data);
+        }
+      });
+    }
+  </script>
+
+
 </x-app-layout>

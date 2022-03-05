@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function() {
     Route::post('addCompany', [CustomerController::class, 'addCompany'])->name('addCompany');
     Route::post('addCustomer', [CustomerController::class, 'addCustomer'])->name('addCustomer');
 
+    Route::post('modalEditCustomer', [CustomerController::class, 'modalEditCustomer'])->name('modalEditCustomer');
+    Route::post('editCustomer', [CustomerController::class, 'editCustomer'])->name('editCustomer');
+
 });
 
 /* Öffentliche Links */

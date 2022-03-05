@@ -53,4 +53,35 @@ class CustomerController extends Controller {
         return back()->with('success', 'Abgespeichert');
     }
 
+    public function modalEditCustomer(Request $request) {
+        $customer = Customers::findOrFail($request->customer_id);
+        return view('customer.modal.editCustomer')->with([
+            'customer' => $customer,
+            'companies' => Companies::get()
+        ]);
+    }
+
+    public function editCustomer(Request $request) {
+        $request->validate([
+            'editForename' => 'required|string|max:150',
+            'editLastname' => 'required|string|max:150',
+            'editEmail' => 'required|string|max:150',
+            'editFunction' => 'sometimes|nullable|string|max:150',
+            'editCustomerNote' => 'sometimes|nullable|string',
+            'editCompany' => 'required'
+        ]);
+
+        $company = Companies::findOrFail($request->editCompany);
+
+        $customer = Customers::findOrFail($request->customer_id);
+        $customer->forename = $request->editForename;
+        $customer->lastname = $request->editLastname;
+        $customer->email = $request->editEmail;
+        $customer->function = $request->editFunction;
+        $customer->note = $request->editCustomerNote;
+        $customer->company_id = $company->id;
+        $customer->save();
+        return back()->with('success', 'Geändert');
+    }
+
 }
