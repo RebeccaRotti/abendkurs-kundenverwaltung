@@ -15,6 +15,8 @@ Route::middleware('auth')->group(function() {
 
     /* Kundenverwaltung */
     Route::get('customer', [CustomerController::class, 'index'])->name('customer');
+    Route::post('addCompany', [CustomerController::class, 'addCompany'])->name('addCompany');
+    Route::post('addCustomer', [CustomerController::class, 'addCustomer'])->name('addCustomer');
 
 });
 

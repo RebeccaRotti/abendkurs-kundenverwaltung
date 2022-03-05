@@ -11,9 +11,9 @@ class Companies extends Model
 
     protected $table = 'companies';
     protected $fillable = [
-        'companyname', // string 150
-        'address', // string 150
-        'note' // Text
+        'companyname', // string 150 required
+        'address', // string 255 nullable
+        'note' // Text nullable
     ];
 
     public function customers() {

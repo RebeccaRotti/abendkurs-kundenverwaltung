@@ -25,6 +25,23 @@
             {{ $header }}
         </header>
 
+        {{-- Ausgabe von Fehler & Erfolgsmeldungen --}}
+        @if($errors->any())
+        <div class="bg-danger text-white text-center">
+            <ul class="list-none">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        @if(session()->has('success'))
+            <div class="bg-success text-center text-white">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+
         <!-- Page Content -->
         <main class="container py-3 mt-4">
             {{ $slot }}

@@ -40,7 +40,7 @@ class StateController extends Controller {
         $newState = new States();
         $newState->state = $request->stateTitle;
         $newState->save();
-        return back();
+        return back()->with('success', 'Abgespeichert');
     }
 
     /**
@@ -80,7 +80,7 @@ class StateController extends Controller {
         $state = States::findOrFail($id);
         $state->state = $request->inputState;
         $state->save();
-        return back();
+        return back()->with('success', 'Update erfolgreich');
     }
 
     /**
