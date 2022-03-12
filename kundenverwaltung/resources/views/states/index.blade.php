@@ -47,8 +47,11 @@
             @foreach($states as $state)
               <tr>
                 <td>{{ $state->state }}</td>
-                <td>
-                  <x-buttonEdit onclick="editState({{ $state->id }})"></x-buttonEdit>
+                <td class="text-end">
+                    @if(count($state->projects) > 0)
+                        <x-buttonDelete onclick="deleteState({{ $state->id }})"></x-buttonDelete>
+                    @endif
+                    <x-buttonEdit onclick="editState({{ $state->id }})"></x-buttonEdit>
                 </td>
               </tr>
             @endforeach
@@ -71,6 +74,10 @@
         }
       });
     }
-    
+
+    function deleteState(id) {
+        // ToDo
+    }
+
   </script>
 </x-app-layout>

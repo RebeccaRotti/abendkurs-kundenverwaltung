@@ -73,7 +73,7 @@
                         </div>
                         <div class="card-body">
                             <p class="card-text">
-                                {{ $project->description }}
+                                {!! $project->description !!}
                             </p>
                             <div class="card-text">
                                 <table class="table">

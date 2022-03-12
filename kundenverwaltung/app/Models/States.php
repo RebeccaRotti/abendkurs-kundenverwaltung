@@ -13,4 +13,8 @@ class States extends Model
     protected $fillable = [
         'state' // string 45
     ];
+
+    public function projects() {
+        return $this->hasMany(Projects::class, 'state_id');
+    }
 }
