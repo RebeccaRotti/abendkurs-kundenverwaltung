@@ -54,6 +54,7 @@
 
         <div class="tab-pane" id="addCustomerTab" role="tabpanel" aria-labelledby="customer-tab">
           <form class="card p-4" method="POST" action="{{ route('addCustomer') }}">
+            
             @csrf
             <div class="row mb-3">
               <label for="inputForename" class="col-form-label col-sm-12 col-md-4">Vorname</label>
@@ -61,7 +62,6 @@
                 <input type="text" id="inputForename" name="inputForename" class="form-control" required>
               </div>
             </div>
-
             <div class="row mb-3">
               <label for="inputLastname" class="col-form-label col-sm-12 col-md-4">Familienname</label>
               <div class="col-sm-12 col-md-8">
@@ -92,6 +92,7 @@
               </select>
               <label for="inputCompany">Firma</label>
             </div>
+            
             <div class="mt-3">
               <button type="submit" class="btn btn-dark d-block me-0 ms-auto">Speichern</button>
             </div>

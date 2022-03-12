@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProjectController;
 
 
 /* Nur mit Login erreichbar - Nach Authentifizierung */
 Route::middleware('auth')->group(function() {
 
     Route::resource('state', StateController::class);
+
+    Route::resource('project', ProjectController::class);
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
