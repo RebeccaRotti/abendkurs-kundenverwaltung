@@ -16,7 +16,7 @@
                 <x-input id="editTitle" name="editTitle" type="text" required value="{{ $project->title }}" />
             </div>
             <div class="form-floating my-4">
-                <textarea id="editDescription" name="editDescription" class="form-control" placeholder="Beschreibung" required>{{ $project->description }}</textarea>
+                <textarea id="editDescription" name="editDescription" class="form-control" placeholder="Beschreibung" required>{!! $project->description !!}</textarea>
                 <label for="editDescription" class="pt-5">Beschreibung</label>
             </div>
             <div class="my-4">
