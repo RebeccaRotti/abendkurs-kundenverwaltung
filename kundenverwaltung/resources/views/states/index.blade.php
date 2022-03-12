@@ -48,7 +48,7 @@
               <tr>
                 <td>{{ $state->state }}</td>
                 <td class="text-end">
-                    @if(count($state->projects) > 0)
+                    @if(count($state->projects) == 0)
                         <x-buttonDelete onclick="deleteState({{ $state->id }})"></x-buttonDelete>
                     @endif
                     <x-buttonEdit onclick="editState({{ $state->id }})"></x-buttonEdit>
