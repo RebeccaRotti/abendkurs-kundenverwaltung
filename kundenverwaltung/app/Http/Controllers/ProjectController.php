@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Projects;
+use App\Models\Companies;
+use App\Models\States;
 
 class ProjectController extends Controller
 {
@@ -14,7 +16,9 @@ class ProjectController extends Controller
      */
     public function index() {
         return view('project.index')->with([
-            'projects' => Projects::get()
+            'projects' => Projects::get(),
+            'companies' => Companies::get(),
+            'states' => States::get()
         ]);
     }
 
@@ -34,9 +38,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $request->validate([
+            'addTitle' => 'required|string|max:150',
+            'addDescription' => 'required|string',
+            'addRelease' => 'sometimes|nullable|string',
+        ]);
+        $state = States::findOrFail($request->addState);
+        $company = Companies::findOrFail($request->addCompany);
+        $new = new Projects();
+        $new->title = $request->addTitle;
+        $new->description = $request->addDescription;
+        $new->release = $request->addRelease;
+        $new->state_id = $state->id;
+        $new->company_id = $company->id;
+        $new->save();
+        return back()->with('success', 'Saved');
     }
 
     /**
@@ -47,7 +64,12 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $project = Projects::findOrFail($id);
+        return view('project.modal.edit')->with([
+            'project' => $project,
+            'companies' => Companies::get(),
+            'states' => States::get()
+        ]);
     }
 
     /**
@@ -68,9 +90,22 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id) {
+        $request->validate([
+            'editTitle' => 'required|string|max:150',
+            'editDescription' => 'required|string',
+            'editRelease' => 'sometimes|nullable|string',
+        ]);
+        $state = States::findOrFail($request->editState);
+        $company = Companies::findOrFail($request->editCompany);
+        $new = Projects::findOrFail($id);
+        $new->title = $request->editTitle;
+        $new->description = $request->editDescription;
+        $new->release = $request->editRelease;
+        $new->state_id = $state->id;
+        $new->company_id = $company->id;
+        $new->save();
+        return back()->with('success', 'Saved');
     }
 
     /**

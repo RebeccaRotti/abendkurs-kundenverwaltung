@@ -14,7 +14,15 @@ class Projects extends Model
         'title', // string 150
         'description', // text
         'releasedate', // date
-        // states_id foreign 
-        // companies_id foreign
+        // state_id foreign
+        // company_id foreign
     ];
+
+    public function state() {
+        return $this->belongsTo(States::class,  'state_id', 'id');
+    }
+
+    public function company() {
+        return $this->belongsTo(Companies::class, 'company_id',  'id');
+    }
 }
