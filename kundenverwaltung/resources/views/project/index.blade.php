@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-floating my-4">
                                 <textarea id="addDescription" name="addDescription" class="form-control" placeholder="Beschreibung" required></textarea>
-                                <label for="addDescription">Beschreibung</label>
+                                <label for="addDescription" class="pt-5">Beschreibung</label>
                             </div>
                             <div class="my-4">
                                 <x-label for="addRelease" :value="__('Release')" />
@@ -111,6 +111,13 @@
         </div>
 
   </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#addDescription').summernote();
+        });
+    </script>
+
     <script>
 
         function editProject(id) {

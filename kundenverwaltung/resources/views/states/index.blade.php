@@ -59,7 +59,8 @@
         </table>
       </div>
   </div>
-  <script>
+
+    <script>
 
     function editState(id) {
       $.ajax({

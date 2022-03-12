@@ -17,7 +17,7 @@
             </div>
             <div class="form-floating my-4">
                 <textarea id="editDescription" name="editDescription" class="form-control" placeholder="Beschreibung" required>{{ $project->description }}</textarea>
-                <label for="editDescription">Beschreibung</label>
+                <label for="editDescription" class="pt-5">Beschreibung</label>
             </div>
             <div class="my-4">
                 <x-label for="editRelease" :value="__('Release')" />
@@ -48,3 +48,9 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#editDescription').summernote();
+    });
+</script>
