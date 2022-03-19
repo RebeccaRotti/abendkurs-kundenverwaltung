@@ -51,7 +51,7 @@ class StateController extends Controller {
      */
     public function show($id) {
         $state = States::findOrFail($id);
-        return view('states.modal.edit')->with([
+        return view('states.modal.delete')->with([
             'state' => $state
         ]);
     }
@@ -63,7 +63,10 @@ class StateController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+        $state = States::findOrFail($id);
+        return view('states.modal.edit')->with([
+            'state' => $state
+        ]);
     }
 
     /**
@@ -89,8 +92,9 @@ class StateController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        $state = States::findOrFail($id);
+        $state->delete();
+        return back()->with('success', 'Erfolgreich gelöscht');
     }
 }

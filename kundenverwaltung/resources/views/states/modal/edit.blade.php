@@ -5,7 +5,8 @@
         <h5 class="modal-title">
           Status editieren
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
       </div>
       <form method="POST" action="{{ url('/state', ['id' => $state->id]) }}">
         @csrf

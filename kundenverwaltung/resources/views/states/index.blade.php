@@ -65,7 +65,7 @@
     function editState(id) {
       $.ajax({
         method: "GET",
-        url: 'state/' + id,
+        url: 'state/' + id + '/edit',
         success: function (data) {
           $('#modalContainer').html(data);
           $('#editModal').modal('show');
@@ -77,7 +77,17 @@
     }
 
     function deleteState(id) {
-        // ToDo
+        $.ajax({
+            method: "GET",
+            url: 'state/' + id,
+            success: function (data) {
+                $('#modalContainer').html(data);
+                $('#deleteModal').modal('show');
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
     }
 
   </script>
