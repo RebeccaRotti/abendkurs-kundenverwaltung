@@ -6,6 +6,12 @@
     </x-slot>
 
     <div class="py-3">
-        You're logged in!
+        <p>You're logged in!</p>
+        <ul>
+            <li>Delete Project</li>
+            <li>edit Company</li>
+            <li>delete Company</li>
+            <li>delete customer</li>
+        </ul>
     </div>
 </x-app-layout>
