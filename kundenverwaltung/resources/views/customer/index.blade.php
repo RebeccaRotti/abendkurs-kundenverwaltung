@@ -126,16 +126,22 @@
                     </span>
                     <x-buttonEdit onclick="editCustomer({{$customer->id}})"></x-buttonEdit>
                   </div>
-                  <p>{{ $customer->email }}<br>
-                  {{ $customer->function }}<br>
-                  {!! $customer->note ?? '<small>empty</small>' !!}<br>
-                  <small>{{ $customer->created_at }} / {{ $customer->updated_at }}</small></p>
+                  <p>
+                      {{ $customer->email }}<br>
+                      {{ $customer->function }}<br>
+                      {!! $customer->note ?? '<small>empty</small>' !!}<br>
+                      <small>{{ $customer->created_at }} / {{ $customer->updated_at }}</small>
+                  </p>
+                    <x-buttonDelete onclick="deleteCustomer({{ $customer->id }})"></x-buttonDelete>
                 </div>
               @endforeach
 
             </div>
-            <div class="card-footer small">
+            <div class="card-footer d-flex justify-content-between small">
               <p class="m-0">{{ $company->created_at ?? 'no date' }} / {{ $company->updated_at }}</p>
+                @if(!($company->customers()->exists()) && !($company->projects()->exists()))
+                    <x-buttonDelete onclick="deleteCompany({{ $company->id }})"></x-buttonDelete>
+                @endif
             </div>
           </div>
         </div>
@@ -144,6 +150,42 @@
   </div>
 
   <script>
+
+      function deleteCustomer(customer_id) {
+          $.ajax({
+              method: 'POST',
+              url: '{{ route('modalDeleteCustomer') }}',
+              data: {
+                  '_token': '{{ csrf_token() }}',
+                  customer_id: customer_id
+              },
+              success: function(data) {
+                  $('#modalContainer').html(data);
+                  $('#deleteModal').modal('show');
+              },
+              error: function(data) {
+                  console.log(data);
+              }
+          });
+      }
+      function deleteCompany(company_id) {
+          $.ajax({
+              method: 'POST',
+              url: '{{ route('modalDeleteCompany') }}',
+              data: {
+                  '_token': '{{ csrf_token() }}',
+                  company_id: company_id
+              },
+              success: function(data) {
+                  $('#modalContainer').html(data);
+                  $('#deleteModal').modal('show');
+              },
+              error: function(data) {
+                  console.log(data);
+              }
+          });
+      }
+
       function editCompany(company_id) {
           $.ajax({
               method: 'POST',

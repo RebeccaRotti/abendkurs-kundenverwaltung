@@ -28,6 +28,12 @@ Route::middleware('auth')->group(function() {
     Route::post('modalEditCompany', [CustomerController::class, 'modalEditCompany'])->name('modalEditCompany');
     Route::post('editCompany', [CustomerController::class, 'editCompany'])->name('editCompany');
 
+    Route::post('modalDeleteCustomer', [CustomerController::class, 'modalDeleteCustomer'])->name('modalDeleteCustomer');
+    Route::post('deleteCustomer', [CustomerController::class, 'deleteCustomer'])->name('deleteCustomer');
+
+    Route::post('modalDeleteCompany', [CustomerController::class, 'modalDeleteCompany'])->name('modalDeleteCompany');
+    Route::post('deleteCompany', [CustomerController::class, 'deleteCompany'])->name('deleteCompany');
+
 });
 
 /* Öffentliche Links */

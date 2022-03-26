@@ -19,4 +19,9 @@ class Companies extends Model
     public function customers() {
         return $this->hasMany(Customers::class, 'company_id', 'id');
     }
+
+    public function projects() {
+        return $this->hasMany(Projects::class, 'company_id', 'id');
+    }
+
 }

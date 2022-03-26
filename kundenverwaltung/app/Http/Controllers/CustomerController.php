@@ -104,4 +104,30 @@ class CustomerController extends Controller {
         $company->save();
         return back()->with('success', 'update');
     }
+
+    public function modalDeleteCustomer(Request $request) {
+        $customer = Customers::findOrFail($request->customer_id);
+        return view('customer.modal.deleteCustomer')->with([
+            'customer' => $customer
+        ]);
+    }
+
+    public function deleteCustomer(Request $request) {
+        $customer = Customers::findOrFail($request->customer_id);
+        $customer->delete();
+        return back()->with('success', 'delete');
+    }
+
+    public function modalDeleteCompany(Request $request) {
+        $company = Companies::findOrFail($request->company_id);
+        return view('customer.modal.deleteCompany')->with([
+            'company' => $company
+        ]);
+    }
+
+    public function deleteCompany(Request $request) {
+        $company = Companies::findOrFail($request->company_id);
+        $company->delete();
+        return back()->with('success', 'delete');
+    }
 }
