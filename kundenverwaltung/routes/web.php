@@ -25,11 +25,14 @@ Route::middleware('auth')->group(function() {
     Route::post('modalEditCustomer', [CustomerController::class, 'modalEditCustomer'])->name('modalEditCustomer');
     Route::post('editCustomer', [CustomerController::class, 'editCustomer'])->name('editCustomer');
 
+    Route::post('modalEditCompany', [CustomerController::class, 'modalEditCompany'])->name('modalEditCompany');
+    Route::post('editCompany', [CustomerController::class, 'editCompany'])->name('editCompany');
+
 });
 
 /* Öffentliche Links */
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 require __DIR__.'/auth.php';

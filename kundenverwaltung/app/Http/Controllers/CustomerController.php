@@ -7,7 +7,7 @@ use App\Models\Companies;
 use App\Models\Customers;
 
 class CustomerController extends Controller {
-    
+
     public function index() {
         return view('customer.index')->with([
             'companies' => Companies::get()
@@ -49,7 +49,7 @@ class CustomerController extends Controller {
         $newCustomer->note = $request->inputCustomerNote;
         $newCustomer->company_id = $company->id;
         $newCustomer->save();
-        
+
         return back()->with('success', 'Abgespeichert');
     }
 
@@ -84,4 +84,24 @@ class CustomerController extends Controller {
         return back()->with('success', 'Geändert');
     }
 
+    public function modalEditCompany(Request $request) {
+        $company = Companies::findOrFail($request->company_id);
+        return view('customer.modal.editCompany')->with([
+            'company' => $company
+        ]);
+    }
+
+    public function editCompany(Request $request) {
+        $request->validate([
+            'inputCompanyname' => 'required|string|max:150',
+            'inputAddress' => 'sometimes|nullable|string',
+            'inputNote' => 'sometimes|nullable|string',
+        ]);
+        $company = Companies::findOrFail($request->companyID);
+        $company->companyname = $request->inputCompanyname;
+        $company->address = $request->inputAddress;
+        $company->note = $request->inputNote;
+        $company->save();
+        return back()->with('success', 'update');
+    }
 }

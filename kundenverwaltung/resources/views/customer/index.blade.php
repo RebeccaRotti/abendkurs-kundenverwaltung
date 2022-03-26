@@ -9,7 +9,7 @@
 
     <div class="pb-5 mb-5">
       <ul class="nav nav-tabs border-0" role="tablist">
-        
+
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="company-tab" data-bs-toggle="tab" data-bs-target="#addCompanyTab" type="button"
           role="tab" aria-selected="true">Add Company</button>
@@ -19,12 +19,11 @@
           <button class="nav-link" id="customer-tab" data-bs-toggle="tab" data-bs-target="#addCustomerTab" type="button"
           role="tab" aria-selected="false">Add Customer</button>
         </li>
-
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="addCompanyTab" role="tabpanel" aria-labelledby="company-tab">
-          
+
           <form class="card p-4" method="POST" action="{{ route('addCompany') }}">
             @csrf
             <div class="row mb-3">
@@ -54,7 +53,7 @@
 
         <div class="tab-pane" id="addCustomerTab" role="tabpanel" aria-labelledby="customer-tab">
           <form class="card p-4" method="POST" action="{{ route('addCustomer') }}">
-            
+
             @csrf
             <div class="row mb-3">
               <label for="inputForename" class="col-form-label col-sm-12 col-md-4">Vorname</label>
@@ -92,15 +91,13 @@
               </select>
               <label for="inputCompany">Firma</label>
             </div>
-            
+
             <div class="mt-3">
               <button type="submit" class="btn btn-dark d-block me-0 ms-auto">Speichern</button>
             </div>
           </form>
         </div>
       </div>
-
-
     </div>
 
 
@@ -109,13 +106,18 @@
       @foreach($companies as $company)
         <div class="col">
           <div class="card">
-            <h3 class="bg-secondary text-white p-3">{{ $company->companyname }}</h3>
+
+            <div class="d-flex justify-content-between bg-secondary text-white p-3">
+                <h3>{{ $company->companyname }}</h3>
+                <x-buttonEdit onclick="editCompany({{ $company->id }})"></x-buttonEdit>
+            </div>
+
             <div class="card-body">
               <p class="card-text">
                 {{ $company->address }}<br>
                 {{ $company->note }}
               </p>
-              
+
               @foreach($company->customers as $customer)
                 <div class="card-text">
                   <div class="d-flex justify-content-between bg-dark text-white d-block p-1">
@@ -142,19 +144,37 @@
   </div>
 
   <script>
+      function editCompany(company_id) {
+          $.ajax({
+              method: 'POST',
+              url: '{{ route('modalEditCompany') }}',
+              data: {
+                  '_token': '{{ csrf_token() }}',
+                  company_id: company_id
+              },
+              success: function(data) {
+                  $('#modalContainer').html(data);
+                  $('#editModal').modal('show');
+              },
+              error: function(data) {
+                  console.log(data);
+              }
+          });
+      }
+
     function editCustomer(customer_id) {
-   
+
       $.ajax({
         method: 'POST',
         url: '{{ route('modalEditCustomer') }}',
-        data: { 
+        data: {
           "_token": "{{ csrf_token() }}",
-          customer_id: customer_id 
+          customer_id: customer_id
         },
         success: function(data) {
           $('#modalContainer').html(data);
           $('#editModal').modal('show');
-        }, 
+        },
         error: function(data) {
           console.log(data);
         }
